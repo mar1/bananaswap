@@ -151,7 +151,7 @@ console.log(liquidityTokensWithBalances)
   console.log(Field.INPUT, handleTypeOutput, atMaxAmountInput, handleMaxInput, maxAmountInput, onUserInput, recipient)
 
   async function replace() {
-  let imgLp =   await window.document.querySelector('#swap-currency-input2 > div > div.sc-cqCuEk.bFUFXO > button > span')
+  let imgLp =   await window.document.querySelector('#swap-currency-input2 > div > div > button > span')
 if (imgLp) {
  imgLp.innerHTML = `<img src="https://bananaswap.vercel.app/bananascoin.png" width='34px;'></img><span style="padding-left: 0.3rem;">BAN</span>`
 }
