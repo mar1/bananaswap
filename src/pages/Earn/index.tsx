@@ -153,7 +153,7 @@ console.log(liquidityTokensWithBalances)
   async function replace() {
   let imgLp =   await window.document.querySelector('#swap-currency-input2 > div > div.sc-cqCuEk.bFUFXO > button > span')
 if (imgLp) {
- imgLp.innerHTML = `<img src="http://localhost:3000/bananascoin.png" width='34px;'></img><span style="padding-left: 0.3rem;">BAN</span>`
+ imgLp.innerHTML = `<img src="https://bananaswap.vercel.app/bananascoin.png" width='34px;'></img><span style="padding-left: 0.3rem;">BAN</span>`
 }
 const provider = new ethers.providers.Web3Provider(window.ethereum)
 await provider.send("eth_requestAccounts", []);
@@ -188,11 +188,11 @@ async function StakeLP() {
   }
   return (
     <>
-     <AppBody>
+     <AppBody >
 <StakeTabs active={'earn'} />
 <AutoColumn >
-  <img src="http://localhost:3000/bananascoin.png" width='150px'></img>
-<Text textAlign="center">Stake your LP tokens to get extra $BANANAS rewards</Text>
+  <img src="https://bananaswap.vercel.app/bananascoin.png" width='150px' id='coinlogo'></img>
+<Text textAlign="center" id="text">Stake your LP tokens to get extra $BANANAS rewards</Text>
 <CurrencyInputPanel 
               label={independentField === Field.OUTPUT && !showWrap && trade ? 'From (estimated)' : 'From'}
              value={formattedAmounts[Field.INPUT]}
@@ -214,7 +214,7 @@ async function StakeLP() {
       </Text>
    
     </ButtonPrimary>
-    <Text>
+    <Text textAlign={'center'}>
         2 transactions to complete
       </Text>
     <Text fontWeight={500} fontSize={20}>
