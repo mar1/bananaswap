@@ -186,14 +186,15 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #669900;
+  background: rgb(102,153,0);
+background: -moz-linear-gradient(180deg, rgba(102,153,0,1) 0%, rgba(97,136,19,1) 100%, rgba(73,107,4,1) 100%);
+background: -webkit-linear-gradient(180deg, rgba(102,153,0,1) 0%, rgba(97,136,19,1) 100%, rgba(73,107,4,1) 100%);
+background: linear-gradient(180deg, rgba(102,153,0,1) 0%, rgba(97,136,19,1) 100%, rgba(73,107,4,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#669900",endColorstr="#496b04",GradientType=1);
 }
 
 .headernav {
   align-items: center;
-  margin-left: 30vw;
-  margin-top: 2rem;
-  max-width: 100vw;
 }
 
 .logo {
