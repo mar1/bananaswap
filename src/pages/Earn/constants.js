@@ -2,11 +2,6 @@
 // 4 - Rinkeby
 // 1 - Mainnet
 
-"WETH": "0xD909178CC99d318e4D46e7E66a972955859670E1",
-"factory": "0xd15754c4cbed8e5E0b427ABB95b4D61D2B236C03",
-"routerv2": "0x902dae2961f5A49322c7a83Eff1D5725358E9Ab0",
-"multicall": "0x4E2cfca20580747AdBA58cd677A998f8B261Fc21"
-
 export const contractAddresses = {
     erc20: {
       42: '0x9C821fF00DBb2D3D2C908f39bB497766eac2d8c6',
