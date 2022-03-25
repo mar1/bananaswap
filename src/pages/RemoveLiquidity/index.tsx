@@ -490,7 +490,6 @@ export default function RemoveLiquidity({
             pendingText={pendingText}
           />
           <AutoColumn gap="md">
-            <LightCard>
               <AutoColumn gap="20px">
                 <RowBetween>
                   <Text fontWeight={500}>Amount</Text>
@@ -528,13 +527,13 @@ export default function RemoveLiquidity({
                   </>
                 )}
               </AutoColumn>
-            </LightCard>
+       
             {!showDetailed && (
               <>
                 <ColumnCenter>
                   <ArrowDown size="16" color={theme.text2} />
                 </ColumnCenter>
-                <LightCard>
+        
                   <AutoColumn gap="10px">
                     <RowBetween>
                       <Text fontSize={24} fontWeight={500}>
@@ -580,7 +579,7 @@ export default function RemoveLiquidity({
                       </RowBetween>
                     ) : null}
                   </AutoColumn>
-                </LightCard>
+           
               </>
             )}
 

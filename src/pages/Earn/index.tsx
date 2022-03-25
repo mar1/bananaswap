@@ -1,62 +1,34 @@
-import { CurrencyAmount, JSBI, Token, Trade, ChainId } from 'moonbeamswap'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { ArrowDown } from 'react-feather'
-import ReactGA from 'react-ga'
+import { CurrencyAmount, JSBI, Token, ChainId } from 'moonbeamswap'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Text } from 'rebass'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { ThemeContext } from 'styled-components'
-import AddressInputPanel from '../../components/AddressInputPanel'
-import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
-import Card, { GreyCard } from '../../components/Card'
+import { ButtonPrimary } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
-import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { StakeTabs } from '../../components/NavigationTabs'
-import { AutoRow, RowBetween } from '../../components/Row'
-import AdvancedSwapDetailsDropdown from '../../components/swap/AdvancedSwapDetailsDropdown'
-import confirmPriceImpactWithoutFee from '../../components/swap/confirmPriceImpactWithoutFee'
-import { ArrowWrapper, BottomGrouping, SwapCallbackError, Wrapper } from '../../components/swap/styleds'
-import TradePrice from '../../components/swap/TradePrice'
-import TokenWarningModal from '../../components/TokenWarningModal'
-import ProgressSteps from '../../components/ProgressSteps'
-
-import { INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
+import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
 import { useActiveWeb3React } from '../../hooks'
-import { useCurrency } from '../../hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback'
-import useENSAddress from '../../hooks/useENSAddress'
-import { useSwapCallback } from '../../hooks/useSwapCallback'
 import useToggledVersion, { Version } from '../../hooks/useToggledVersion'
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback'
-import { useToggleSettingsMenu, useWalletModalToggle } from '../../state/application/hooks'
 import { Field } from '../../state/swap/actions'
 import {
-  useDefaultsFromURLSearch,
   useDerivedSwapInfo,
   useSwapActionHandlers,
   useSwapState
 } from '../../state/swap/hooks'
-import { useExpertModeManager, useUserDeadline, useUserSlippageTolerance } from '../../state/user/hooks'
-import { LinkStyledButton, TYPE } from '../../theme'
+import { useUserSlippageTolerance } from '../../state/user/hooks'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
-import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
-import { ClickableText } from '../Pool/styleds'
-import Loader from '../../components/Loader'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
-import { usePairs } from '../../data/Reserves'
-import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
-import { Pair } from 'moonbeamswap'
 import '.././style.css'
-import { Contracts } from './contracts.js'
 import { ethers } from 'ethers'
 
 import Stake from './components/Stake'
-import { lpTokenAddress, farmAddress, bananasAddress, lpTokenABI, farmABI, bananasABI} from './conf.js'
+import { lpTokenAddress, farmAddress, lpTokenABI, farmABI} from './conf.js'
 
-import BigNumber from 'bignumber.js'
-import { cpuUsage } from 'process'
+declare let window: any;
 
 export default function Swap() {
   const { t } = useTranslation()
@@ -72,9 +44,9 @@ export default function Swap() {
       currencies[Field.OUTPUT],
       typedValue
     )
-    console.log(currencies)
+    console.log(onWrap)
+    console.log(currencies, wrapInputError)
     const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
-    const { address: recipientAddress } = useENSAddress(recipient)
     const toggledVersion = useToggledVersion()
     const trade = showWrap
       ? undefined
@@ -95,6 +67,7 @@ export default function Swap() {
     const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
     const isValid = !swapInputError
     const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
+    console.log(onSwitchTokens,isValid,onChangeRecipient)
 
   const trackedTokenPairs = useTrackedTokenPairs()
   const tokenPairsWithLiquidityTokens = useMemo(
@@ -108,7 +81,7 @@ export default function Swap() {
     account ?? undefined,
     liquidityTokens
   )
-
+  console.log(fetchingV2PairBalances)
   // fetch the reserves for all V2 pools in which the user has a balance
   const liquidityTokensWithBalances = useMemo(
     () =>
@@ -117,7 +90,7 @@ export default function Swap() {
       ),
     [tokenPairsWithLiquidityTokens, v2PairsBalances]
   )
-
+console.log(liquidityTokensWithBalances)
   const formattedAmounts = {
     [independentField]: typedValue,
     [dependentField]: showWrap
@@ -129,11 +102,13 @@ export default function Swap() {
   const userHasSpecifiedInputOutput = Boolean(
     currencies[Field.INPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
+
+
   const noRoute = !route
   const [allowedSlippage] = useUserSlippageTolerance()
   // check whether the user has approved the router on the input token
   const [approval, approveCallback] = useApproveCallbackFromTrade(trade, allowedSlippage)
-
+  console.log(userHasSpecifiedInputOutput, noRoute, approveCallback)
   // check if user has gone through approval process, used to show two step buttons, reset on token change
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
 
@@ -168,17 +143,13 @@ export default function Swap() {
     [onUserInput]
   )
   const maxAmountInput: CurrencyAmount | undefined = maxAmountSpend(currencyBalances[Field.INPUT])
-  console.log('max', maxAmountSpend(currencyBalances[LP]))
   const atMaxAmountInput = Boolean(maxAmountInput && parsedAmounts[Field.INPUT]?.equalTo(maxAmountInput))
   const handleMaxInput = useCallback(() => {
     alert('o')
   }, [maxAmountInput, onUserInput])
 
-  console.log(Field.INPUT)
-  async function go() {
-let tokenAmount = await window.document.getElementsByClassName('token-amount-input')
-console.log(tokenAmount[0].value)
-  }
+  console.log(Field.INPUT, handleTypeOutput, atMaxAmountInput, handleMaxInput, maxAmountInput, onUserInput, recipient)
+
   async function replace() {
   let imgLp =   await window.document.querySelector('#swap-currency-input2 > div > div.sc-cqCuEk.bFUFXO > button > span')
 if (imgLp) {
@@ -188,6 +159,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum)
 await provider.send("eth_requestAccounts", []);
 const signer = provider.getSigner()
 const signerAddress = await signer.getAddress()
+console.log(signerAddress)
 const farmContract = new ethers.Contract(farmAddress, farmABI, provider);
 let rewardsPerBlock = await farmContract.rewardPerBlock()
 rewardsPerBlock = ethers.utils.formatUnits(rewardsPerBlock, 18)
@@ -214,41 +186,29 @@ async function StakeLP() {
   const event = tx.events[0];
   const enterStaking = await farmContract.deposit("0", spNb)
   }
-  const dpid = 1
-  
-
   return (
     <>
      <AppBody>
 <StakeTabs active={'earn'} />
-<AutoColumn width="500px" gap="lg" justify="center">
+<AutoColumn >
   <img src="http://localhost:3000/bananascoin.png" width='150px'></img>
 <Text textAlign="center">Stake your LP tokens to get extra $BANANAS rewards</Text>
 <CurrencyInputPanel 
-
-
               label={independentField === Field.OUTPUT && !showWrap && trade ? 'From (estimated)' : 'From'}
-           
              value={formattedAmounts[Field.INPUT]}
-                
               currency={LP}
-            
-              onUserInput={handleTypeInput}
-          
-        
-              
+              onUserInput={handleTypeInput}  
               onCurrencySelect={handleInputSelect}
               disableCurrencySelect={true}
-
-             
+              showMaxButton={false}
+              showCommonBases
+              id="swap-currency-input2"
                     /*
               otherCurrency={currencies[Field.OUTPUT]}
               
 */  
-
-              id="swap-currency-input2"
             />
-    <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} onClick={StakeLP}>
+    <ButtonPrimary id="join-pool-button" onClick={StakeLP}>
       <Text fontWeight={500} fontSize={20}>
         {t('stakeLp')}
       </Text>

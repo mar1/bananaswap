@@ -14,7 +14,7 @@ import { currencyId } from '../../utils/currencyId'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
 import { ButtonSecondary } from '../Button'
 
-import Card, { GreyCard } from '../Card'
+import Card from '../Card'
 import { AutoColumn } from '../Column'
 import CurrencyLogo from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
@@ -31,10 +31,10 @@ export const HoverCard = styled(Card)`
     border: 1px solid ${({ theme }) => darken(0.06, theme.bg2)};
   }
 `
-
+console.log(HoverCard)
 interface PositionCardProps {
-  pair: Pair,
-  showUnwrapped?: boolean,
+  pair: Pair
+  showUnwrapped?: boolean
   border?: string
 }
 
@@ -64,7 +64,6 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   return (
     <>
       {userPoolBalance && (
-        <GreyCard border={border}>
           <AutoColumn gap="12px">
             <FixedHeightRow>
               <RowFixed>
@@ -117,7 +116,6 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               </FixedHeightRow>
             </AutoColumn>
           </AutoColumn>
-        </GreyCard>
       )}
     </>
   )
@@ -152,7 +150,6 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
       : [undefined, undefined]
 
   return (
-    <HoverCard border={border}>
       <AutoColumn gap="12px">
         <FixedHeightRow onClick={() => setShowMore(!showMore)} style={{ cursor: 'pointer' }}>
           <RowFixed>
@@ -223,7 +220,9 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
               </Text>
             </FixedHeightRow>
 
-
+            <AutoRow justify="center" marginTop={'10px'}>
+              <ExternalLink href={`.....`}>View pool information (comming soon) ↗</ExternalLink>
+            </AutoRow>
             <RowBetween marginTop="10px">
               <ButtonSecondary as={Link} to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} width="48%">
                 Add
@@ -235,6 +234,5 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
           </AutoColumn>
         )}
       </AutoColumn>
-    </HoverCard>
   )
 }

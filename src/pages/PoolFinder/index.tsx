@@ -69,11 +69,9 @@ export default function PoolFinder() {
   }, [setShowSearch])
 
   const prerequisiteMessage = (
-    <LightCard padding="45px 10px">
       <Text textAlign="center">
         {!account ? 'Connect to a wallet to find pools' : 'Select a token to find your liquidity.'}
       </Text>
-    </LightCard>
   )
 
   return (
@@ -139,41 +137,36 @@ export default function PoolFinder() {
             hasPosition && pair ? (
               <MinimalPositionCard pair={pair} border="1px solid #CED0D9" />
             ) : (
-              <LightCard padding="45px 10px">
+          
                 <AutoColumn gap="sm" justify="center">
                   <Text textAlign="center">You don’t have liquidity in this pool yet.</Text>
                   <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                     <Text textAlign="center">Add liquidity.</Text>
                   </StyledInternalLink>
                 </AutoColumn>
-              </LightCard>
+      
             )
           ) : validPairNoLiquidity ? (
-            <LightCard padding="45px 10px">
+        
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center">No pool found.</Text>
                 <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                   Create pool.
                 </StyledInternalLink>
               </AutoColumn>
-            </LightCard>
           ) : pairState === PairState.INVALID ? (
-            <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center" fontWeight={500}>
                   Invalid pair.
                 </Text>
               </AutoColumn>
-            </LightCard>
           ) : pairState === PairState.LOADING ? (
-            <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center">
                   Loading
                   <Dots />
                 </Text>
               </AutoColumn>
-            </LightCard>
           ) : null
         ) : (
           prerequisiteMessage

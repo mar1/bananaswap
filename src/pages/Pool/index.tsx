@@ -75,17 +75,17 @@ export default function Pool() {
             </RowBetween>
 
             {!account ? (
-              <LightCard padding="40px">
+           
                 <TYPE.body color={theme.text3} textAlign="center">
                   {t('connectToViewLiquidity')}
                 </TYPE.body>
-              </LightCard>
+         
             ) : v2IsLoading ? (
-              <LightCard padding="40px">
+        
                 <TYPE.body color={theme.text3} textAlign="center">
                   <Dots>{t('loading')}</Dots>
                 </TYPE.body>
-              </LightCard>
+        
             ) : allV2PairsWithLiquidity?.length > 0 ? (
               <>
                 {allV2PairsWithLiquidity.map(v2Pair => (
@@ -93,11 +93,11 @@ export default function Pool() {
                 ))}
               </>
             ) : (
-              <LightCard padding="40px">
+          
                 <TYPE.body color={theme.text3} textAlign="center">
                   {t('noLiquidityFound')}
                 </TYPE.body>
-              </LightCard>
+        
             )}
 
             <div>

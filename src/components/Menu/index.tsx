@@ -87,7 +87,7 @@ export default function Menu() {
   useOnClickOutside(node, open ? toggle : undefined)
 
   return (
-    <StyledMenu ref={node}>
+    <StyledMenu>
       <StyledMenuButton onClick={toggle}>
         <StyledMenuIcon />
       </StyledMenuButton>

@@ -1,6 +1,6 @@
 import { ChainId } from 'moonbeamswap'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
+
 import { Text } from 'rebass'
 
 import styled from 'styled-components'
@@ -10,15 +10,16 @@ import { useActiveWeb3React } from '../../hooks'
 //import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
 
-import { YellowCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
 
 import { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
-import { lpTokenAddress, farmAddress, bananasAddress, lpTokenABI, farmABI, bananasABI} from '../conf.js'
+import { bananasAddress, bananasABI} from '../conf.js'
 import { ethers } from 'ethers'
 // import VersionSwitch from './VersionSwitch'
+
+declare let window: any;
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -76,20 +77,6 @@ const AccountElement = styled.div<{ }>`
   }
 `
 
-const TestnetWrapper = styled.div`
-  white-space: nowrap;
-  width: fit-content;
-  margin-left: 10px;
-  pointer-events: auto;
-`
-
-const NetworkCard = styled(YellowCard)`
-  width: fit-content;
-  margin-right: 10px;
-  border-radius: 12px;
-  padding: 8px 12px;
-`
-
 const UniIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
@@ -114,19 +101,19 @@ const BalanceText = styled(Text)`
   `};
 `
 
-const NETWORK_LABELS: {  } = {
-  [ChainId.MAINNET]: null,
+const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
+  [ChainId.MAINNET]: 'MainNet',
   [ChainId.STANDALONE]: 'Moonbeam Development',
   [ChainId.MOONROCK]: 'Moonrock Rococo',
   [ChainId.MOONBASE]: 'Moonbase Alpha',
   [ChainId.MOONSHADOW]: 'Moonshadow Westend',
 }
 
-
+console.log(NETWORK_LABELS)
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
-
+  console.log(chainId, ChainId)
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   //const [isDark] = useDarkModeManager()
   async function fetchGLMB() {
@@ -155,10 +142,7 @@ export default function Header() {
         </HeaderElement>
         <HeaderControls>
           <HeaderElement>
-            <TestnetWrapper>
-              {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
-            </TestnetWrapper>
-            <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
+            <AccountElement style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
                 <>
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>

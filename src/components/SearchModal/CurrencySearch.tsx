@@ -10,7 +10,6 @@ import { useAllTokens, useToken } from '../../hooks/Tokens'
 import { useSelectedListInfo } from '../../state/lists/hooks'
 import { CloseIcon, LinkStyledButton, TYPE } from '../../theme'
 import { isAddress } from '../../utils'
-import Card from '../Card'
 import Column from '../Column'
 import ListLogo from '../ListLogo'
 import QuestionHelper from '../QuestionHelper'
@@ -186,7 +185,7 @@ export function CurrencySearch({
       </div>
 
       <Separator />
-      <Card>
+
         <RowBetween>
           {selectedListInfo.current ? (
             <Row>
@@ -208,7 +207,7 @@ export function CurrencySearch({
             {selectedListInfo.current ? 'Change' : 'Select a list'}
           </LinkStyledButton>
         </RowBetween>
-      </Card>
+
     </Column>
   )
 }

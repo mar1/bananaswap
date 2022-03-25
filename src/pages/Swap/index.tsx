@@ -332,7 +332,7 @@ export default function Swap() {
             ) : null}
 
             {showWrap ? null : (
-              <Card padding={'.25rem .75rem 0 .75rem'} borderRadius={'20px'}>
+         
                 <AutoColumn gap="4px">
                   {Boolean(trade) && (
                     <RowBetween align="center">
@@ -357,7 +357,7 @@ export default function Swap() {
                     </RowBetween>
                   )}
                 </AutoColumn>
-              </Card>
+          
             )}
           </AutoColumn>
           <BottomGrouping>
@@ -369,9 +369,9 @@ export default function Swap() {
                   (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
               </ButtonPrimary>
             ) : noRoute && userHasSpecifiedInputOutput ? (
-              <GreyCard style={{ textAlign: 'center' }}>
+             
                 <TYPE.main mb="4px">{t('insufficientLiquidityForThisTrade')}</TYPE.main>
-              </GreyCard>
+        
             ) : showApproveFlow ? (
               <RowBetween>
                 <ButtonConfirmed
