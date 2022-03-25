@@ -1,0 +1,71 @@
+body{
+    max-width: 100vw;
+}
+
+.headernav {
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+    width: 100vw;
+}
+
+.KUBTK > div > div {
+    color: white !important;
+}
+
+.KUBTK > div > div > div {
+    color: #FFA400 !important;
+}
+
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+    padding-left: 33rem;
+}
+@media only screen and (max-width: 1024px) {
+.logo {
+    align-content: center;
+    padding-left: 0%;
+    margin-left: 0 !important;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .headernav {
+        align-content: center;
+        padding-left: 0%;
+        margin-left: 0 !important;
+        margin-right: auto;
+        text-align: center;
+        justify-content: center;
+
+    }
+
+    .logo {
+        align-content: center;
+        padding-left: 10%;
+        margin-left: 0 !important;
+        margin-right: auto;
+        text-align: center;
+        justify-content: center;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+  }
+
+#swap-currency-input2 {
+    min-width: 100%;
+}
+
+.ACTIVE {
+    color: #FFA400 !important;
+    font-weight: bolder !important;
+}
