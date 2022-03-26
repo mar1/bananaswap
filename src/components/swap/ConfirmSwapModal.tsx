@@ -1,4 +1,4 @@
-import { currencyEquals, Trade } from 'moonbeamswap'
+import { currencyEquals, Trade } from '@mar1/bananaswap-sdsk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,

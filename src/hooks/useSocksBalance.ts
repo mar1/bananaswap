@@ -1,4 +1,4 @@
-import { JSBI } from 'moonbeamswap'
+import { JSBI } from '@mar1/bananaswap-sdsk'
 import { useMemo } from 'react'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { useActiveWeb3React } from './index'

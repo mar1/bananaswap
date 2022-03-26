@@ -1,4 +1,4 @@
-import { CurrencyAmount, DEV, JSBI } from 'moonbeamswap'
+import { CurrencyAmount, DEV, JSBI } from '@mar1/bananaswap-sdsk'
 import { MIN_ETH } from '../constants'
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Price } from 'moonbeamswap'
+import { Price } from '@mar1/bananaswap-sdsk'
 import { useContext } from 'react'
 import { Repeat } from 'react-feather'
 import { Text } from 'rebass'

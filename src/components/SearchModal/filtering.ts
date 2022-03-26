@@ -1,5 +1,5 @@
 import { isAddress } from '../../utils'
-import { Token } from 'moonbeamswap'
+import { Token } from '@mar1/bananaswap-sdsk'
 
 export function filterTokens(tokens: Token[], search: string): Token[] {
   if (search.length === 0) return tokens

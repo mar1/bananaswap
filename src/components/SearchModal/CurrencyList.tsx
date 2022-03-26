@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, DEV, Token } from 'moonbeamswap'
+import { Currency, CurrencyAmount, currencyEquals, DEV, Token } from '@mar1/bananaswap-sdsk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'

@@ -1,4 +1,4 @@
-import { Currency, Percent, Price } from 'moonbeamswap'
+import { Currency, Percent, Price } from '@mar1/bananaswap-sdsk'
 import React, { useContext } from 'react'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'

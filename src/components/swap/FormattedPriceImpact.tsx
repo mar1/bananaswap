@@ -1,4 +1,4 @@
-import { Percent } from 'moonbeamswap'
+import { Percent } from '@mar1/bananaswap-sdsk'
 import React from 'react'
 import { ONE_BIPS } from '../../constants'
 import { warningSeverity } from '../../utils/prices'

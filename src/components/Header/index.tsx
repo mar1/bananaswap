@@ -1,4 +1,4 @@
-import { ChainId } from 'moonbeamswap'
+import { ChainId } from '@mar1/bananaswap-sdsk'
 import React from 'react'
 
 import { Text } from 'rebass'

@@ -1,4 +1,4 @@
-import { Trade, TradeType } from 'moonbeamswap'
+import { Trade, TradeType } from '@mar1/bananaswap-sdsk'
 import React, { useContext, useMemo } from 'react'
 import { ArrowDown, AlertTriangle } from 'react-feather'
 import { Text } from 'rebass'

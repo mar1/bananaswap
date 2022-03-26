@@ -1,4 +1,4 @@
-import { Currency, Pair } from 'moonbeamswap'
+import { Currency, Pair } from '@mar1/bananaswap-sdsk'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { darken } from 'polished'

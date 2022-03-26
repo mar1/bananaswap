@@ -50,7 +50,7 @@
     "inter-ui": "^3.13.1",
     "jazzicon": "^1.5.0",
     "lodash.flatmap": "^4.5.0",
-    "moonbeamswap": "1.0.4",
+    "@mar1/bananaswap-sdsk": "1.0.6",
     "multicodec": "^2.0.0",
     "multihashes": "^3.0.1",
     "polished": "^3.3.2",
@@ -87,8 +87,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "preinstall": "npx npm-force-resolutions",
-    "postinstall": "rm -rf ./node_modules/moonbeamswap; cp -r ./sdk/ ./node_modules/moonbeamswap/"
+    "preinstall": "npx npm-force-resolutions"
   },
   "eslintConfig": {
     "extends": "react-app"

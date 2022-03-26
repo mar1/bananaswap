@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, Token, ChainId } from 'moonbeamswap'
+import { CurrencyAmount, JSBI, Token, ChainId } from '@mar1/bananaswap-sdsk'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Text } from 'rebass'
 import { useTranslation } from 'react-i18next'

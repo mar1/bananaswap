@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, Token, Trade } from 'moonbeamswap'
+import { CurrencyAmount, JSBI, Token, Trade } from '@mar1/bananaswap-sdsk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
