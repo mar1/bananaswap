@@ -1,0 +1,1 @@
+rm -rf ./node_modules/moonbeamswap; cp -r ./sdk/ ./node_modules/moonbeamswap/
